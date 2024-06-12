@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="KeplerMapper">
+  <title>Slovak Topology | KeplerMapper</title>
+
+  <link rel="icon" type="image/png" href="http://i.imgur.com/axOG6GJ.jpg" />
+
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Mono:700,300' rel='stylesheet' type='text/css'>
+  <style>* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Roboto Mono", "Helvetica", sans-serif;
+  font-size: 14px;
+}
+
+#logo {
+  width:  85px;
+  height: 85px;
+}
+
+#display {
+  color: #95A5A6;
+  background: #212121;
+}
+
+#header {
+  background: #111111;
+}
+
+#print {
+  color: #000;
+  background: #FFF;
+}
+
+h1 {
+  font-size: 21px;
+  font-weight: 300;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 18px;
+  padding-bottom: 20px;
+  font-weight: 300;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+h4 {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-bottom:0px;
+}
+
+
+#meta_content h3 {
+  float: left;
+  padding-right: 8px;
+}
+
+p, #tooltip_content h3, ol, ul, table {
+  padding-bottom: 10px;
+}
+
+ol, ul {
+  padding-left: 20px;
+}
+
+ol b {
+  display: block;
+}
+
+a {
+  color: #16a085;
+  text-decoration: none;
+}
+
+.pane {
+  position: relative;
+}
+
+.pane-left {
+  float: left;
+}
+
+.pane-right {
+  float: right;
+}
+
+a:hover {
+  color: #2ecc71;
+}
+
+.banner {
+  /* height: 35px; */
+  padding: 10px 0px;
+}
+
+
+#print #header {
+  background: #FFF;
+}
+
+
+#canvas {
+  width: 100%;
+}
+
+#svg {
+  position: absolute;
+}
+
+#toolbar {
+  padding-top: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+#display #toolbar {
+}
+
+#display .banner {
+  border-top: 1px solid #000;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.tool_item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pane_content {
+  width: 300px;
+  height:100%;
+  padding: 20px;
+  overflow: auto;
+  display: none;
+}
+
+.pane {
+  z-index: 1;
+}
+
+#display .pane_content {
+  background: #191919;
+}
+
+#print .pane_content{
+  background: #FFF;
+}
+
+#meta_content::-webkit-scrollbar, #tooltip_content::-webkit-scrollbar {
+  width: 1em;
+}
+
+#meta_content::-webkit-scrollbar-track, #tooltip_content::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+#meta_content::-webkit-scrollbar-thumb, #tooltip_content::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.histogram {
+  display: block;
+  height: 100px;
+  padding-top: 50px;
+  clear: both;
+}
+
+#display .histogram {
+  opacity: 0.68;
+}
+
+.bin {
+  width: 10%;
+  float: left;
+}
+
+.bin div {
+  font-size: 10px;
+  display: block;
+  width: 35px;
+  margin-top: -30px;
+  text-align: right;
+  margin-left: -3px;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+}
+
+.histogram:hover {
+  opacity: 1.;
+}
+
+#display .circle {
+  stroke-opacity: 0.18;
+  stroke-width: 7px;
+  stroke: #000;
+}
+
+#print .circle {
+  stroke-opacity: 1;
+  stroke-width: 2px;
+  stroke: #000;
+  stroke-linecap: round;
+}
+
+#print .link {
+  stroke: #000;
+}
+
+#display .link {
+  stroke: rgba(160, 160, 160, 0.5);
+}
+
+table {
+  border-collapse: collapse;
+  display: table;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+td, th {
+  padding: 5px;
+  text-align: left;
+}
+
+#display th {
+  background: #212121
+}
+
+td {
+  border-bottom: 1px solid #111;
+}
+
+.highlight {
+  filter: url(#drop-shadow-pulse);
+}
+
+.control-row {
+  padding: 5px 0px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  background-color: transparent;
+  font-weight: 300;
+  color: #FFFFFF;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  color: #000000;
+  background-color: #FFFFFF;
+}
+
+.btn:disabled {
+  color: #FFFFFF;
+  opacity: .35;
+}
+
+#print .btn {
+  color: #000;
+  border-color: #000
+}
+
+#print .btn:hover {
+  color: #FFFFFF;
+  background-color: #000000
+}
+
+#print .btn:disabled {}
+
+#toolbar .btn {
+  padding: 0 1.2em;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+}
+
+#config-file-loader {
+  margin-bottom: .5em;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.wrap {
+  display: flex;
+}
+
+.wrap-header div:last-child {
+  margin-left: auto;
+}
+
+.wrap-end {
+  justify-content: flex-end;
+}
+
+.wrap-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap-logo .logo {
+  margin: auto;
+}
+
+.wrap-header {
+  /* padding: 5px 10px; */
+  padding: 5px 5px 5px 10px;
+  justify-content: space-between;
+}
+
+#display .wrap-header {
+  box-shadow: 0px 0px 4px #000;
+}
+
+.toolbar-container {
+  margin-left: -10px;
+}
+</style>
+
+</head>
+
+<body id="display">
+
+  <!-- Variables used later -->
+  <script>
+    const graph = {"links": [{"source": 0, "target": 3, "width": 1}, {"source": 1, "target": 5, "width": 1}, {"source": 4, "target": 6, "width": 1}, {"source": 10, "target": 14, "width": 1}, {"source": 11, "target": 12, "width": 1}, {"source": 13, "target": 16, "width": 1}, {"source": 14, "target": 17, "width": 1}, {"source": 15, "target": 18, "width": 1}, {"source": 16, "target": 20, "width": 1}, {"source": 17, "target": 20, "width": 1}, {"source": 18, "target": 21, "width": 1}, {"source": 18, "target": 23, "width": 1}, {"source": 19, "target": 21, "width": 1}, {"source": 19, "target": 22, "width": 1}, {"source": 20, "target": 21, "width": 1}, {"source": 20, "target": 22, "width": 1}, {"source": 21, "target": 24, "width": 1}, {"source": 21, "target": 25, "width": 1}, {"source": 21, "target": 26, "width": 1}, {"source": 22, "target": 24, "width": 1}, {"source": 22, "target": 25, "width": 1}, {"source": 22, "target": 26, "width": 1}, {"source": 23, "target": 24, "width": 1}, {"source": 23, "target": 25, "width": 1}, {"source": 23, "target": 26, "width": 1}, {"source": 24, "target": 27, "width": 1}, {"source": 24, "target": 28, "width": 1}, {"source": 24, "target": 29, "width": 1}, {"source": 25, "target": 27, "width": 1}, {"source": 25, "target": 28, "width": 1}, {"source": 25, "target": 29, "width": 1}, {"source": 26, "target": 27, "width": 1}, {"source": 26, "target": 29, "width": 1}, {"source": 27, "target": 30, "width": 1}, {"source": 27, "target": 31, "width": 1}, {"source": 27, "target": 32, "width": 1}, {"source": 28, "target": 30, "width": 1}, {"source": 29, "target": 30, "width": 1}, {"source": 29, "target": 31, "width": 1}, {"source": 30, "target": 33, "width": 1}, {"source": 30, "target": 34, "width": 1}, {"source": 30, "target": 35, "width": 1}, {"source": 31, "target": 33, "width": 1}, {"source": 31, "target": 34, "width": 1}, {"source": 31, "target": 35, "width": 1}, {"source": 32, "target": 33, "width": 1}, {"source": 33, "target": 36, "width": 1}, {"source": 33, "target": 37, "width": 1}, {"source": 33, "target": 38, "width": 1}, {"source": 34, "target": 36, "width": 1}, {"source": 34, "target": 37, "width": 1}, {"source": 34, "target": 38, "width": 1}, {"source": 35, "target": 36, "width": 1}, {"source": 35, "target": 37, "width": 1}, {"source": 36, "target": 39, "width": 1}, {"source": 36, "target": 40, "width": 1}, {"source": 36, "target": 41, "width": 1}, {"source": 37, "target": 39, "width": 1}, {"source": 38, "target": 39, "width": 1}, {"source": 38, "target": 40, "width": 1}], "nodes": [{"color": [[0.4246246246246247]], "id": "", "name": "cube1_cluster0", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 5}, "custom_tooltips": ["septembra", "okt\u00f3bra", "marca", "j\u00fana", "novembra"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 25.0, "perc": 20.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 80.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube1_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.44244244244244246]], "id": "", "name": "cube1_cluster1", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["kitt"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 100.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube1_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.03003003003003003]], "id": "", "name": "cube1_cluster2", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["mba"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 100.0, "perc": 100.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube1_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.45917345917345914]], "id": "", "name": "cube2_cluster0", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 7}, "custom_tooltips": ["m\u00e1ja", "marca", "j\u00fana", "apr\u00edla", "j\u00fala", "decembra", "febru\u00e1ra"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 85.7}, {"color": "rgb(33, 155, 136)", "height": 17.0, "perc": 14.3}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube2_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.19419419419419418]], "id": "", "name": "cube2_cluster1", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 3}, "custom_tooltips": ["linear", "socorro", "loneos"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 100.0, "perc": 66.7}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 50.0, "perc": 33.3}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube2_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.44594594594594594]], "id": "", "name": "cube2_cluster2", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 2}, "custom_tooltips": ["kitt", "spacewatch"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 100.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube2_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.32799466132799465]], "id": "", "name": "cube3_cluster0", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 3}, "custom_tooltips": ["linear", "mesa", "loneos"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 50.0, "perc": 33.3}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 66.7}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube3_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.4244244244244244]], "id": "", "name": "cube3_cluster1", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["augusta"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 100.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube3_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.1021021021021021]], "id": "", "name": "cube3_cluster2", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["najni\u017e\u0161\u00ed"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 100.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube3_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.4414414414414415]], "id": "", "name": "cube4_cluster0", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 2}, "custom_tooltips": ["peak", "neat"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 100.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube4_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.3283283283283283]], "id": "", "name": "cube4_cluster1", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["svetovej"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 100.0, "perc": 100.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube4_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.1011011011011011]], "id": "", "name": "cube4_cluster2", "size": 1, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 1}, "custom_tooltips": ["polo\u017een\u00fd"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 100.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube4_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.16691691691691693]], "id": "", "name": "cube5_cluster0", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 4}, "custom_tooltips": ["bod", "najvy\u0161\u0161\u00ed", "polo\u017een\u00fd", "anderson"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 100.0, "perc": 50.0}, {"color": "rgb(68, 51, 125)", "height": 50.0, "perc": 25.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 50.0, "perc": 25.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube5_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.5335335335335335]], "id": "", "name": "cube5_cluster1", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 5}, "custom_tooltips": ["tri", "banskej", "bystrici", "bystrica", "\u0161tyri"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 33.0, "perc": 20.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 33.0, "perc": 20.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 60.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube5_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.5217717717717718]], "id": "", "name": "cube5_cluster2", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 4}, "custom_tooltips": ["vojny", "svetovej", "koncom", "za\u010diatkom"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 50.0, "perc": 25.0}, {"color": "rgb(46, 107, 141)", "height": 50.0, "perc": 25.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 100.0, "perc": 50.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube5_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.37787787787787785]], "id": "", "name": "cube6_cluster0", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 8}, "custom_tooltips": ["rozlohu", "str\u00e1nka", "html", "ofici\u00e1lna", "palomar", "alpes", "rh\u00f4ne", "_odkazy"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 33.0, "perc": 12.5}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 37.5}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 33.0, "perc": 12.5}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 33.0, "perc": 12.5}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 33.0, "perc": 12.5}, {"color": "rgb(155, 215, 59)", "height": 33.0, "perc": 12.5}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube6_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.3093093093093093]], "id": "", "name": "cube6_cluster1", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 8}, "custom_tooltips": [")", "(", "mal", "dva", "mali", "iii", "bystrica", "bansk\u00e1"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 100.0, "perc": 25.0}, {"color": "rgb(68, 51, 125)", "height": 50.0, "perc": 12.5}, {"color": "rgb(58, 80, 138)", "height": 50.0, "perc": 12.5}, {"color": "rgb(46, 107, 141)", "height": 100.0, "perc": 25.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 25.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube6_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.39564564564564564]], "id": "", "name": "cube6_cluster2", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 12}, "custom_tooltips": ["ale", "v\u0161ak", "storo\u010dia", "janu\u00e1ra", "preto\u017ee", "druhej", "napriek", "za\u010diatku", "vojne", "mnoho", "koncom", "polovici"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 67.0, "perc": 16.7}, {"color": "rgb(68, 51, 125)", "height": 33.0, "perc": 8.3}, {"color": "rgb(58, 80, 138)", "height": 100.0, "perc": 25.0}, {"color": "rgb(46, 107, 141)", "height": 33.0, "perc": 8.3}, {"color": "rgb(36, 131, 141)", "height": 33.0, "perc": 8.3}, {"color": "rgb(33, 155, 136)", "height": 33.0, "perc": 8.3}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 100.0, "perc": 25.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube6_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.3089405194668352]], "id": "", "name": "cube7_cluster0", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 19}, "custom_tooltips": ["departemente", "odkazy", "graf", "departementu", "nasleduj\u00faci", "zobrazuje", "jpg", "ofici\u00e1lna", "november", "december", "slovenskej", "s\u00fahvezd\u00ed", "d\u0148a", "ceny", "galaxia", "alpes", "solid", "rh\u00f4ne", "silla"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 43.0, "perc": 15.8}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 36.8}, {"color": "rgb(58, 80, 138)", "height": 14.0, "perc": 5.3}, {"color": "rgb(46, 107, 141)", "height": 14.0, "perc": 5.3}, {"color": "rgb(36, 131, 141)", "height": 43.0, "perc": 15.8}, {"color": "rgb(33, 155, 136)", "height": 14.0, "perc": 5.3}, {"color": "rgb(51, 178, 121)", "height": 14.0, "perc": 5.3}, {"color": "rgb(94, 199, 96)", "height": 14.0, "perc": 5.3}, {"color": "rgb(155, 215, 59)", "height": 14.0, "perc": 5.3}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube7_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.5191345191345191]], "id": "", "name": "cube7_cluster1", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 13}, "custom_tooltips": ["by\u0165", "m\u00f4\u017ee", "nieko\u013eko", "dvoch", "mala", "mno\u017estvo", "viacer\u00fdch", "ve\u013ea", "malo", "mnoh\u00fdch", "nieko\u013ek\u00fdch", "viacero", "mohli"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 25.0, "perc": 7.7}, {"color": "rgb(68, 51, 125)", "height": 25.0, "perc": 7.7}, {"color": "rgb(58, 80, 138)", "height": 75.0, "perc": 23.1}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 25.0, "perc": 7.7}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 30.8}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 25.0, "perc": 7.7}, {"color": "rgb(220, 226, 37)", "height": 50.0, "perc": 15.4}]], "node_id": "cube7_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.412984412984413]], "id": "", "name": "cube7_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 21}, "custom_tooltips": ["aj", "ale", "tak", "potom", "ii", "najm\u00e4", "preto", "dva", "hlavne", "tomu", "iii", "napriek", "predov\u0161etk\u00fdm", "n\u00e1sledne", "ke\u010f\u017ee", "dobe", "konci", "lebo", "tej", "univerzite", "av\u0161ak"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 50.0, "perc": 9.5}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 19.0}, {"color": "rgb(58, 80, 138)", "height": 50.0, "perc": 9.5}, {"color": "rgb(46, 107, 141)", "height": 100.0, "perc": 19.0}, {"color": "rgb(36, 131, 141)", "height": 50.0, "perc": 9.5}, {"color": "rgb(33, 155, 136)", "height": 50.0, "perc": 9.5}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 50.0, "perc": 9.5}, {"color": "rgb(155, 215, 59)", "height": 50.0, "perc": 9.5}, {"color": "rgb(220, 226, 37)", "height": 25.0, "perc": 4.8}]], "node_id": "cube7_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.3713559713559713]], "id": "", "name": "cube8_cluster0", "size": 5, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 65}, "custom_tooltips": ["rd", "aj", "obyvate\u013eov", "m\u00e1", "s\u00fa", "ktor\u00fd", "boli", "by\u0165", "v\u00fdvoj", "graf", "po\u010dtu", "mesto", "tie\u017e", "september", "okt\u00f3ber", "marec", "august", "napr", "december", "stal", "janu\u00e1r", "apr\u00edl", "febru\u00e1r", "n\u00e1h\u013ead", "prv\u00fd", "m\u00e1j", "napr\u00edklad", "j\u00fal", "\u017eien", "maj\u00fa", "franc\u00fazsky", "j\u00fan", "slovensko", "slovensk\u00e1", "hlavne", "republiky", "\u017eeny", "slovensk\u00e9", "m\u00f4\u017eu", "prvej", "mu\u017ei", "slovensk\u00e9ho", "stala", "nemecko", "str\u00e1nky", "//www", "za\u010dali", "franc\u00fazsko", "dobe", "plan\u00e9tka", "iv", "priemerom", "malo", "skladate\u013e", "matematik", "konci", "dvojhra", "mestom", "mohol", "doby", "stor", "taliansko", "konca", "\u010deskej", "zalo\u017een\u00e1"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 71.0, "perc": 15.4}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 21.5}, {"color": "rgb(58, 80, 138)", "height": 64.0, "perc": 13.8}, {"color": "rgb(46, 107, 141)", "height": 50.0, "perc": 10.8}, {"color": "rgb(36, 131, 141)", "height": 29.0, "perc": 6.2}, {"color": "rgb(33, 155, 136)", "height": 50.0, "perc": 10.8}, {"color": "rgb(51, 178, 121)", "height": 29.0, "perc": 6.2}, {"color": "rgb(94, 199, 96)", "height": 14.0, "perc": 3.1}, {"color": "rgb(155, 215, 59)", "height": 29.0, "perc": 6.2}, {"color": "rgb(220, 226, 37)", "height": 29.0, "perc": 6.2}]], "node_id": "cube8_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.5433878322767212]], "id": "", "name": "cube8_cluster1", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 45}, "custom_tooltips": [",", "u\u017e", "ke\u010f", "len", "viac", "asi", "tieto", "v\u0161etky", "nieko\u013eko", "dve", "pribli\u017ene", "\u010dase", "\u00fazemia", "eur\u00f3py", "ma\u010farsku", "po\u013esku", "n\u00e1sledne", "niektor\u00fdch", "troch", "mno\u017estvo", "ne\u017e", "v\u00fd\u0161ke", "hr\u00e1ch", "albumu", "\u0161t\u00e1tov", "hoci", "univerzity", "severnej", "mnoh\u00fdch", "hier", "nikdy", "spojen\u00fdch", "singel", "nadmorskej", "rak\u00fasku", "cenu", "univerzite", "nemecku", "nieko\u013ek\u00fdch", "najprv", "skladba", "skladby", "viacero", "\u0161kole", "av\u0161ak"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 20.0, "perc": 4.4}, {"color": "rgb(68, 51, 125)", "height": 30.0, "perc": 6.7}, {"color": "rgb(58, 80, 138)", "height": 60.0, "perc": 13.3}, {"color": "rgb(46, 107, 141)", "height": 40.0, "perc": 8.9}, {"color": "rgb(36, 131, 141)", "height": 60.0, "perc": 13.3}, {"color": "rgb(33, 155, 136)", "height": 50.0, "perc": 11.1}, {"color": "rgb(51, 178, 121)", "height": 40.0, "perc": 8.9}, {"color": "rgb(94, 199, 96)", "height": 20.0, "perc": 4.4}, {"color": "rgb(155, 215, 59)", "height": 100.0, "perc": 22.2}, {"color": "rgb(220, 226, 37)", "height": 30.0, "perc": 6.7}]], "node_id": "cube8_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.4853424853424853]], "id": "", "name": "cube8_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 28}, "custom_tooltips": ["}", "obc\u00ed", "regi\u00f3ne", "departementu", "\u00famrtia", "okrese", "ngc", "bar", "style", "border", "px", "pyr\u00e9n\u00e9es", "kant\u00f3n", "galaxia", "hviezdna", "zdanliv\u00e1", "till", "color", "marne", "bgcolor", "solid", "shift", "calais", "fontsize", "sa\u00f4ne", "garonne", "c\u00f4te", "kant\u00f3ny"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 50.0, "perc": 10.7}, {"color": "rgb(68, 51, 125)", "height": 67.0, "perc": 14.3}, {"color": "rgb(58, 80, 138)", "height": 33.0, "perc": 7.1}, {"color": "rgb(46, 107, 141)", "height": 33.0, "perc": 7.1}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 21.4}, {"color": "rgb(33, 155, 136)", "height": 17.0, "perc": 3.6}, {"color": "rgb(51, 178, 121)", "height": 50.0, "perc": 10.7}, {"color": "rgb(94, 199, 96)", "height": 33.0, "perc": 7.1}, {"color": "rgb(155, 215, 59)", "height": 17.0, "perc": 3.6}, {"color": "rgb(220, 226, 37)", "height": 67.0, "perc": 14.3}]], "node_id": "cube8_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.4161720775894005]], "id": "", "name": "cube9_cluster0", "size": 5, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 127}, "custom_tooltips": [".", "a", "roku", "bol", "jeho", "\u017ee", "alebo", "s\u00fa", "to", "ktor\u00e1", "bola", "ktor\u00e9", "nach\u00e1dza", "in\u00e9", "boli", "a\u017e", "bolo", "jej", "ich", "franc\u00fazska", "\u010do", "kde", "rokoch", "po\u010das", "by", "rokov", "nie", "slovensk\u00fd", "\u010di", "napr", "iba", "roky", "sveta", "e\u0161te", "prv\u00fd", "text", "tom", "majstrovstv\u00e1", "bar", "ju", "\u010desko", "jeden", "album", "tieto", "maj\u00fa", "no", "\u010dasto", "bratislave", "dnes", "ani", "slovenska", "tomto", "z\u00edskal", "za\u010dal", "s\u00fa\u010dasnosti", "prv\u00e1", "storo\u010d\u00ed", "\u010dase", "mo\u017eno", "kedy", "obdob\u00ed", "zn\u00e1my", "ve\u013ekos\u0165", "in\u00fdch", "mo\u017en\u00e9", "niektor\u00e9", "ve\u013ek\u00fd", "tam", "\u010fal\u0161\u00edch", "ve\u013ek\u00e9", "\u0161koly", "za\u010dala", "r\u00f4znych", "niektor\u00fdch", "p\u00f4sobil", "op\u00e4\u0165", "otec", "ne\u017e", "podobne", "jedna", "\u010dlenovia", "za\u010dali", "obdobia", "prv\u00fdkr\u00e1t", "r\u00f4zne", "rovnako", "albumu", "piesne", "olympijsk\u00fdch", "slovensk\u00fdch", "\u010dlenom", "v\u00fd\u0161ka", "priemerom", "vznikla", "univerzity", "dokonca", "patria", "zn\u00e1me", "menej", "hier", "zn\u00e1ma", "ma\u0165", "druh\u00e1", "v\u00e4\u010d\u0161inou", "priebehu", "\u010dlen", "nikdy", "dodnes", "\u010dlovek", "ostatn\u00e9", "tak\u017ee", "matka", "stalo", "piese\u0148", "najprv", "stor", "z\u00edskala", "nebol", "\u010dlenov", "n\u00e1rodn\u00e9ho", "university", "pr\u00edpadne", "skladieb", "\u0161kole", "hmotnos\u0165", "jednu", "n\u00e1rodnej"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 100.0, "perc": 15.7}, {"color": "rgb(68, 51, 125)", "height": 65.0, "perc": 10.2}, {"color": "rgb(58, 80, 138)", "height": 100.0, "perc": 15.7}, {"color": "rgb(46, 107, 141)", "height": 70.0, "perc": 11.0}, {"color": "rgb(36, 131, 141)", "height": 60.0, "perc": 9.4}, {"color": "rgb(33, 155, 136)", "height": 50.0, "perc": 7.9}, {"color": "rgb(51, 178, 121)", "height": 70.0, "perc": 11.0}, {"color": "rgb(94, 199, 96)", "height": 30.0, "perc": 4.7}, {"color": "rgb(155, 215, 59)", "height": 50.0, "perc": 7.9}, {"color": "rgb(220, 226, 37)", "height": 40.0, "perc": 6.3}]], "node_id": "cube9_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.4929268891533043]], "id": "", "name": "cube9_cluster1", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 53}, "custom_tooltips": ["score", "obce", "obc\u00ed", "team", "utc", "okrese", "okt\u00f3ber", "august", "}}", "s\u00fabor", "apr\u00edl", "}}}", "n\u00e1h\u013ead", "m\u00e1j", "franc\u00fazsky", "j\u00fan", "loire", "svg", "nemeck\u00fd", "astron\u00f3m", "spisovate\u013e", "s\u00fahvezdie", "haute", "herec", "file", "spojen\u00e9", "houten", "hudobn\u00fd", "cena", "anglick\u00fd", "color", "marne", "width", "bgcolor", "b\u00e1snik", "skladate\u013e", "seine", "pas", "\u0161tvorhra", "kr\u00e1\u013eovstvo", "\u0161t\u00e1ty", "dvojhra", "nord", "cenu", "vojvodstve", "moselle", "rusko", "herschel", "fyzik", "maritime", "pamiatok", "nobelovej", "kult\u00farnych"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 44.0, "perc": 7.5}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 17.0}, {"color": "rgb(58, 80, 138)", "height": 44.0, "perc": 7.5}, {"color": "rgb(46, 107, 141)", "height": 78.0, "perc": 13.2}, {"color": "rgb(36, 131, 141)", "height": 22.0, "perc": 3.8}, {"color": "rgb(33, 155, 136)", "height": 56.0, "perc": 9.4}, {"color": "rgb(51, 178, 121)", "height": 56.0, "perc": 9.4}, {"color": "rgb(94, 199, 96)", "height": 78.0, "perc": 13.2}, {"color": "rgb(155, 215, 59)", "height": 67.0, "perc": 11.3}, {"color": "rgb(220, 226, 37)", "height": 44.0, "perc": 7.5}]], "node_id": "cube9_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.4223375918291173]], "id": "", "name": "cube9_cluster2", "size": 5, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 59}, "custom_tooltips": ["obyvate\u013eov", "ktor\u00fd", "miesto", "mesto", "slovensku", "\u00famrtia", "\u010desku", "ve\u013emi", "narodenia", "tento", "toho", "mu\u017eov", "okolo", "ktorej", "pri\u010dom", "asi", "ktor\u00fdch", "v\u010faka", "ktor\u00e9ho", "ktorom", "t\u00fdm", "http", "nich", "str\u00e1nke", "slovensk\u00e1", "slovensky", "\u017eeny", "\u00fazemia", "\u00fazemie", "kv\u00f4li", "nej", "po\u013esku", "krajiny", "ten", "strane", "hlavn\u00e9", "priezvisko", "str\u00e1nky", "//www", "priemern\u00fd", "taktie\u017e", "\u010d\u00edm", "neho", "ju\u017enej", "eur\u00f3pe", "ktor\u00fdm", "krajine", "www", "hlavn\u00fdm", "priezvisk\u00e1", "\u010desk\u00e1", "spojen\u00fdch", "cca", "\u010desk\u00e9", "nemecku", "mestom", "nielen", "km\u00b2", "miesta"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 30.0, "perc": 5.1}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 16.9}, {"color": "rgb(58, 80, 138)", "height": 90.0, "perc": 15.3}, {"color": "rgb(46, 107, 141)", "height": 80.0, "perc": 13.6}, {"color": "rgb(36, 131, 141)", "height": 70.0, "perc": 11.9}, {"color": "rgb(33, 155, 136)", "height": 90.0, "perc": 15.3}, {"color": "rgb(51, 178, 121)", "height": 40.0, "perc": 6.8}, {"color": "rgb(94, 199, 96)", "height": 20.0, "perc": 3.4}, {"color": "rgb(155, 215, 59)", "height": 40.0, "perc": 6.8}, {"color": "rgb(220, 226, 37)", "height": 30.0, "perc": 5.1}]], "node_id": "cube9_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.5040094442268356]], "id": "", "name": "cube10_cluster0", "size": 6, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 184}, "custom_tooltips": ["je", "z", "\u2013", "ako", "pozri", "obce", "\"", "obec", "k", "to", "ktor\u00e1", "zoznam", "i", "the", "obci", "tu", "ich", "so", "of", "ho", "nesk\u00f4r", "aby", "roka", "mesta", "tento", "bratislava", "ak", "tejto", "okresu", "e\u0161te", "text", "n", "som", "okrem", "jeden", "rok", "kr", "v\u010faka", "mest\u00e1", "svoje", "no", "teda", "\u017eije", "okres", "new", "meste", "nov\u00e9", "ktorom", "\u0161t\u00e1tu", "\u010fal\u0161ie", "meno", "\u00fazem\u00ed", "tohto", "svoju", "t\u00e1to", "patr\u00ed", "strany", "prv\u00e1", "svoj", "sv", "bude", "t\u00fdchto", "s\u00fahvezdie", "ve\u013ekos\u0165", "klub", "\u010dl\u00e1nok", "\u013eud\u00ed", "\u00fazemie", "ku", "hudobn\u00e9", "pou\u017e\u00edva", "kraji", "sr", "miest", "vek", "takmer", "n\u00e1rodn\u00e9", "center", "d\u013a\u017eka", "nov\u00fd", "\u0161t\u00e1t", "krajiny", "\u017eilo", "typ", "pr\u00edpade", "svete", "diela", "niekedy", "\u010dl\u00e1nky", "vtedy", "st\u00e1le", "diskusia", "\u0148om", "jedn\u00fdm", "franc\u00fazsku", "\u010dl\u00e1nku", "strana", "nov\u00e1", "r\u00f4zne", "obdobie", "\u0161kola", "albumy", "nakoniec", "v\u00e4\u010d\u0161ina", "neho", "rovnako", "\u010dl\u00e1nkov", "york", "ktor\u00fdm", "zatia\u013e", "v\u00fd\u0161ka", "t\u00fato", "krajine", "sv\u00e4t\u00e9ho", "t\u00edmov", "tvoria", "dokonca", "rak\u00fasko", "v\u017edy", "nach\u00e1dzaj\u00fa", "pr\u00e1va", "\u013eudia", "here\u010dka", "sk\u00f4r", "\u00faplne", "dru\u017estvo", "n\u00edm", "ma\u0165", "mus\u00ed", "obvode", "priezvisk\u00e1", "predt\u00fdm", "vojna", "\u010dloveka", "s\u00eddlom", "\u0161\u00edrka", "chr\u00e1nen\u00e9", "prahe", "vznikol", "play", "najviac", "s\u00eddlo", "hokeji", "vznik", "\u010dinnosti", "preva\u017ene", "off", "budova", "jedno", "\u010dlovek", "pomerne", "nov\u00e9ho", "republika", "druhy", "tie", "rieka", "hudby", "rusko", "hokej", "naj\u010dastej\u0161ie", "z\u00edskala", "pr\u00edrody", "s\u00fa\u010das\u0165", "krajina", "budovy", "nielen", "nov\u00fdch", "university", "z\u00e1pasov", "pr\u00edpadne", "km\u00b2", "miesta", "nie\u010do", "celkom", "kraj\u00edn", "zalo\u017een\u00e9", "nem\u00e1", "stanica", "\u017eupe", "d\u00e1", "teraz", "v\u0161etko", "pou\u017e\u00edvaj\u00fa", "n\u00e1rodnej"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 77.0, "perc": 10.9}, {"color": "rgb(68, 51, 125)", "height": 35.0, "perc": 4.9}, {"color": "rgb(58, 80, 138)", "height": 100.0, "perc": 14.1}, {"color": "rgb(46, 107, 141)", "height": 73.0, "perc": 10.3}, {"color": "rgb(36, 131, 141)", "height": 46.0, "perc": 6.5}, {"color": "rgb(33, 155, 136)", "height": 88.0, "perc": 12.5}, {"color": "rgb(51, 178, 121)", "height": 88.0, "perc": 12.5}, {"color": "rgb(94, 199, 96)", "height": 73.0, "perc": 10.3}, {"color": "rgb(155, 215, 59)", "height": 50.0, "perc": 7.1}, {"color": "rgb(220, 226, 37)", "height": 77.0, "perc": 10.9}]], "node_id": "cube10_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.6391206020835649]], "id": "", "name": "cube10_cluster1", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 27}, "custom_tooltips": ["team", "\u2020", "narodil", "svg", "gmina", "politik", "p\u00f4sobil", "poloha", "obr\u00e1zok", "map", "image", "png", "b\u00e1snik", "pracoval", "\u0161tudoval", "filozof", "hral", "nord", "spev\u00e1k", "vojvodstve", "mape", "mapa", "powiat", "maritime", "\u00a0\u2013\u00a0narodil", "re\u017eis\u00e9r", "vpravo"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 33.0, "perc": 7.4}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 17.0, "perc": 3.7}, {"color": "rgb(46, 107, 141)", "height": 33.0, "perc": 7.4}, {"color": "rgb(36, 131, 141)", "height": 33.0, "perc": 7.4}, {"color": "rgb(33, 155, 136)", "height": 67.0, "perc": 14.8}, {"color": "rgb(51, 178, 121)", "height": 33.0, "perc": 7.4}, {"color": "rgb(94, 199, 96)", "height": 100.0, "perc": 22.2}, {"color": "rgb(155, 215, 59)", "height": 67.0, "perc": 14.8}, {"color": "rgb(220, 226, 37)", "height": 67.0, "perc": 14.8}]], "node_id": "cube10_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.5046435324213102]], "id": "", "name": "cube10_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 36}, "custom_tooltips": ["do", "po", "a\u017e", "usa", "slovensk\u00fd", "ktor\u00fa", "km", "americk\u00fd", "objavil", "\u010desk\u00fd", "j\u00e1n", "slovensky", "latinsky", "from", "ve\u013ek\u00fd", "syn", "ve\u013ek\u00e1", "otec", "druh\u00fd", "prv\u00fdkr\u00e1t", "jednej", "anglick\u00fd", "ofici\u00e1lne", "www", "width", "prv\u00fdm", "americk\u00e1", "mal\u00e9", "raz", "strednej", "kg", "mal\u00fd", "hmotnos\u0165", "taliansky", "kateg\u00f3rii", "britsk\u00fd"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 60.0, "perc": 8.3}, {"color": "rgb(68, 51, 125)", "height": 60.0, "perc": 8.3}, {"color": "rgb(58, 80, 138)", "height": 100.0, "perc": 13.9}, {"color": "rgb(46, 107, 141)", "height": 80.0, "perc": 11.1}, {"color": "rgb(36, 131, 141)", "height": 60.0, "perc": 8.3}, {"color": "rgb(33, 155, 136)", "height": 80.0, "perc": 11.1}, {"color": "rgb(51, 178, 121)", "height": 80.0, "perc": 11.1}, {"color": "rgb(94, 199, 96)", "height": 60.0, "perc": 8.3}, {"color": "rgb(155, 215, 59)", "height": 40.0, "perc": 5.6}, {"color": "rgb(220, 226, 37)", "height": 100.0, "perc": 13.9}]], "node_id": "cube10_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.6025428413488115]], "id": "", "name": "cube11_cluster0", "size": 5, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 67}, "custom_tooltips": ["\u0027", "\u2013", "\u00b7", "zoznam", "\u00a0\u2013\u00a0", "pod", "#presmeruj", "km", "toto", "meno", "rod", "kostol", "potok", "zomrel", "hry", "pou\u017e\u00edva", "n\u00e1zvom", "hr\u00e1\u010di", "pr\u00edtok", "syn", "hr\u00e1\u010d", "cesta", "dostal", "awards", "gitara", "le\u017e\u00ed", "rieky", "\u0161kola", "dielo", "z\u00e1pasy", "turnaj", "plan\u00e9tky", "menom", "here\u010dka", "dru\u017estvo", "n\u00edm", "mu\u017estvo", "cesty", "z\u00e1kladn\u00e9", "knihy", "pr\u00edrodn\u00e1", "spev", "ochrany", "hudba", "\u0161port", "diel", "stanice", "najlep\u0161\u00ed", "hr\u00e1", "rieka", "hudby", "hokej", "rodu", "\u00fa\u010dasti", "mapa", "men\u00e1", "kniha", "zalo\u017eil", "re\u017eis\u00e9r", "n\u00e1zvy", "man\u017eelka", "stanica", "pedag\u00f3g", "poh\u013ead", "rusk\u00fd", "t\u00fdmto", "veku"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 55.0, "perc": 9.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 36.0, "perc": 6.0}, {"color": "rgb(46, 107, 141)", "height": 82.0, "perc": 13.4}, {"color": "rgb(36, 131, 141)", "height": 45.0, "perc": 7.5}, {"color": "rgb(33, 155, 136)", "height": 73.0, "perc": 11.9}, {"color": "rgb(51, 178, 121)", "height": 45.0, "perc": 7.5}, {"color": "rgb(94, 199, 96)", "height": 73.0, "perc": 11.9}, {"color": "rgb(155, 215, 59)", "height": 100.0, "perc": 16.4}, {"color": "rgb(220, 226, 37)", "height": 100.0, "perc": 16.4}]], "node_id": "cube11_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.5422428798224976]], "id": "", "name": "cube11_cluster1", "size": 6, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 157}, "custom_tooltips": ["\u003c/s\u003e", "v", "na", "sa", "s", "po", "o", "od", "vo", "po\u010det", "m", "medzi", "projekty", "zo", "pred", "j", "t", "\u010dasti", "skupiny", "roka", "\u010das\u0165", "ak", "oblasti", "proti", "mu", "spolu", "n", "ulica", "ktor\u00ed", "mest\u00e1", "svojej", "slovensk\u00ed", "v\u0161etk\u00fdch", "\u00fazem\u00ed", "svojho", "tohto", "t\u00e1to", "prv\u00e9", "praha", "film", "s\u00fa\u010das\u0165ou", "syst\u00e9m", "ide", "p\u00f4vodne", "svojich", "\u013eud\u00ed", "tvor\u00ed", "\u017eivota", "miest", "z\u00e1rove\u0148", "mieste", "kr\u00e1\u013ea", "oblas\u0165", "\u017eivot", "jozef", "ms", "typ", "ko\u0161ice", "pr\u00e1ve", "\u010das", "im", "vr\u00e1tane", "postupne", "ve\u013ek\u00e1", "z\u00e1klade", "svete", "de\u0148", "ka\u017ed\u00fd", "cel\u00fd", "obyvate\u013estva", "jednotky", "diskusia", "strana", "resp", "pravdepodobne", "nov\u00e1", "klubu", "v\u00e4\u010d\u0161ina", "druh", "stavby", "metrov", "me", "funkcia", "jedn\u00e9ho", "rad", "t\u00fato", "sme", "pr\u00e1vo", "znamen\u00e1", "v\u017edy", "pr\u00e1va", "\u013eudia", "sk\u00f4r", "syst\u00e9mu", "sez\u00f3ne", "s\u00e1m", "\u00faplne", "\u010fal\u0161\u00ed", "kto", "fc", "svojom", "obvode", "predt\u00fdm", "vzniku", "open", "\u010dinnos\u0165", "v\u00fdvoja", "r\u00fdchlos\u0165", "pavol", "hlavn\u00fd", "\u201e", "vznikol", "p\u00f4sobenia", "kluby", "cm", "druhov", "ja", "centre", "michal", "v\u00fdznam", "jedno", "novej", "minulosti", "prv\u00fdch", "filmy", "nov\u00e9ho", "funkcie", "kateg\u00f3rie", "republika", "juraj", "centrum", "mili\u00f3nov", "celej", "dobre", "prv\u00e9ho", "ulice", "\u010dasu", "kg", "v\u00f4bec", "j\u00e1na", "v\u00fdznamn\u00e9", "k\u00fdm", "nov\u00fdch", "projekt", "kraj\u00edn", "jednotliv\u00fdch", "music", "\u0161tefan", "mimo", "celkovo", "aspo\u0148", "jednotka", "records", "teraz", "vo\u010di", "oboch", "kateg\u00f3rii"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 79.0, "perc": 9.6}, {"color": "rgb(68, 51, 125)", "height": 53.0, "perc": 6.4}, {"color": "rgb(58, 80, 138)", "height": 68.0, "perc": 8.3}, {"color": "rgb(46, 107, 141)", "height": 74.0, "perc": 8.9}, {"color": "rgb(36, 131, 141)", "height": 74.0, "perc": 8.9}, {"color": "rgb(33, 155, 136)", "height": 100.0, "perc": 12.1}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 12.1}, {"color": "rgb(94, 199, 96)", "height": 95.0, "perc": 11.5}, {"color": "rgb(155, 215, 59)", "height": 100.0, "perc": 12.1}, {"color": "rgb(220, 226, 37)", "height": 84.0, "perc": 10.2}]], "node_id": "cube11_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.4622349622349622]], "id": "", "name": "cube11_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 22}, "custom_tooltips": ["seed", "c", "et", "and", "\u0161abl\u00f3ny", "\u0161t\u00e1tu", "spolo\u010dnosti", "van", "ku", "sr", "spolo\u010dnos\u0165", "sk", "\u0161t\u00e1t", "at", "com", "william", "cz", "do\u0161lo", "or", "feder\u00e1cie", "flag", "eur\u00f3pskej"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 20.0, "perc": 4.5}, {"color": "rgb(68, 51, 125)", "height": 40.0, "perc": 9.1}, {"color": "rgb(58, 80, 138)", "height": 60.0, "perc": 13.6}, {"color": "rgb(46, 107, 141)", "height": 80.0, "perc": 18.2}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 22.7}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 40.0, "perc": 9.1}, {"color": "rgb(94, 199, 96)", "height": 20.0, "perc": 4.5}, {"color": "rgb(155, 215, 59)", "height": 60.0, "perc": 13.6}, {"color": "rgb(220, 226, 37)", "height": 20.0, "perc": 4.5}]], "node_id": "cube11_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.5099485450362643]], "id": "", "name": "cube12_cluster0", "size": 5, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 57}, "custom_tooltips": ["\u003c/s\u003e", "-", "pre", "za", "pri", "medzi", "si", "d", "t", "r", "b", "%", "f", "e", "p", "x", "ktor\u00ed", "g", "\u00a0", "ide", "w", "smrti", "spr\u00e1va", "vr\u00e1tane", "pr\u00e1ce", "der", "rieky", "ve\u013ekej", "priamo", "rad", "ha", "stretnutie", "zmysle", "inform\u00e1cie", "deti", "dn\u00ed", "rozdiel", "arm\u00e1dy", "rady", "pr\u00edrodn\u00e1", "\u010dast\u00ed", "organiz\u00e1cie", "triedy", "mm", "tretiny", "\u0161port", "kult\u00fary", "feder\u00e1cie", "r\u00ed\u0161e", "celej", "sily", "seba", "mimo", "existuje", "vodn\u00e9", "slu\u017eby", "bl\u00edzkosti"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 78.0, "perc": 12.3}, {"color": "rgb(68, 51, 125)", "height": 100.0, "perc": 15.8}, {"color": "rgb(58, 80, 138)", "height": 33.0, "perc": 5.3}, {"color": "rgb(46, 107, 141)", "height": 22.0, "perc": 3.5}, {"color": "rgb(36, 131, 141)", "height": 44.0, "perc": 7.0}, {"color": "rgb(33, 155, 136)", "height": 56.0, "perc": 8.8}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 15.8}, {"color": "rgb(94, 199, 96)", "height": 78.0, "perc": 12.3}, {"color": "rgb(155, 215, 59)", "height": 56.0, "perc": 8.8}, {"color": "rgb(220, 226, 37)", "height": 67.0, "perc": 10.5}]], "node_id": "cube12_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.6396192110477825]], "id": "", "name": "cube12_cluster1", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 49}, "custom_tooltips": ["vo", "/", "extern\u00e9", "skupina", "cez", "peter", "\u010d", "\u010falej", "p\u00f4vodne", "john", "kr\u00e1\u013e", "kr\u00e1\u013ea", "hr\u00e1\u010d", "smerom", "autor", "pravdepodobne", "franti\u0161ek", "verzia", "_", "david", "poch\u00e1dza", "dom", "zeme", "svojom", "ivan", "poz\u00edcia", "podarilo", "prezident", "st", "karol", "nap\u00edsal", "dal", "svojou", "rodiny", "juraj", "futbalista", "richard", "rodu", "vladim\u00edr", "domov", "milan", "hviezdy", "m\u00e1ria", "vedie", "\u0161tefan", "michael", "b\u00fdval\u00fd", "in\u00fd", "veku"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 30.0, "perc": 6.1}, {"color": "rgb(68, 51, 125)", "height": 10.0, "perc": 2.0}, {"color": "rgb(58, 80, 138)", "height": 10.0, "perc": 2.0}, {"color": "rgb(46, 107, 141)", "height": 70.0, "perc": 14.3}, {"color": "rgb(36, 131, 141)", "height": 20.0, "perc": 4.1}, {"color": "rgb(33, 155, 136)", "height": 50.0, "perc": 10.2}, {"color": "rgb(51, 178, 121)", "height": 50.0, "perc": 10.2}, {"color": "rgb(94, 199, 96)", "height": 60.0, "perc": 12.2}, {"color": "rgb(155, 215, 59)", "height": 100.0, "perc": 20.4}, {"color": "rgb(220, 226, 37)", "height": 90.0, "perc": 18.4}]], "node_id": "cube12_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.5332377832377833]], "id": "", "name": "cube12_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 44}, "custom_tooltips": ["kateg\u00f3ria", "#", "pod\u013ea", "de", "?", "la", "n\u00e1zov", "#presmeruj", "d\u00e1tum", "titul", "g\u00f3ly", "objektov", "isbn", "port\u00e1l", "r\u00e1mci", "on", "pomocou", "z\u00e1klade", "typu", "program", "popis", "turnaj", "druh", "stavby", "cd", "for", "menom", "mi", "t\u00edm", "ozna\u010denie", "fin\u00e1le", "v\u00fdvoja", "z\u00e1kladn\u00e9", "cie\u013eom", "you", "p\u00f4sobenia", "udalost\u00ed", "hc", "model", "poh\u00e1r", "uk", "vplyv", "n\u00e1stroje", "vzh\u013eadom"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 57.0, "perc": 9.1}, {"color": "rgb(68, 51, 125)", "height": 43.0, "perc": 6.8}, {"color": "rgb(58, 80, 138)", "height": 29.0, "perc": 4.5}, {"color": "rgb(46, 107, 141)", "height": 86.0, "perc": 13.6}, {"color": "rgb(36, 131, 141)", "height": 43.0, "perc": 6.8}, {"color": "rgb(33, 155, 136)", "height": 100.0, "perc": 15.9}, {"color": "rgb(51, 178, 121)", "height": 71.0, "perc": 11.4}, {"color": "rgb(94, 199, 96)", "height": 86.0, "perc": 13.6}, {"color": "rgb(155, 215, 59)", "height": 29.0, "perc": 4.5}, {"color": "rgb(220, 226, 37)", "height": 86.0, "perc": 13.6}]], "node_id": "cube12_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.6151866151866152]], "id": "", "name": "cube13_cluster0", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 35}, "custom_tooltips": ["in", "p", "l", "saint", "h", "+", "g", "martin", "g\u00f3ly", "pr\u00e1ce", "dejiny", "autor", "der", "stav", "stretnutie", "san", "al", "jan", "jazyk", "paul", "ivan", "st", "organiz\u00e1cie", "robert", "y", "jean", "sk\u00f3re", "richard", "city", "milan", "q", "james", "an", "tvar", "slu\u017eby"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 43.0, "perc": 8.6}, {"color": "rgb(58, 80, 138)", "height": 71.0, "perc": 14.3}, {"color": "rgb(46, 107, 141)", "height": 14.0, "perc": 2.9}, {"color": "rgb(36, 131, 141)", "height": 14.0, "perc": 2.9}, {"color": "rgb(33, 155, 136)", "height": 43.0, "perc": 8.6}, {"color": "rgb(51, 178, 121)", "height": 86.0, "perc": 17.1}, {"color": "rgb(94, 199, 96)", "height": 100.0, "perc": 20.0}, {"color": "rgb(155, 215, 59)", "height": 43.0, "perc": 8.6}, {"color": "rgb(220, 226, 37)", "height": 86.0, "perc": 17.1}]], "node_id": "cube13_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.6233809567142901]], "id": "", "name": "cube13_cluster1", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 33}, "custom_tooltips": ["de", "nad", "u", "bez", "!", "obsahuje", "spr\u00e1va", "pomocou", "\u010d\u00edslo", "v\u00ed\u0165az", "pusr", "program", "kolo", "tv", "vody", "zeme", "lode", "world", "ozna\u010denie", "fin\u00e1le", "s\u00fa\u0165a\u017ee", "cirkvi", "stupe\u0148", "du", "liga", "data", "id", "domov", "motor", "se", "divadlo", "in\u00fd", "povrchu"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 17.0, "perc": 3.0}, {"color": "rgb(68, 51, 125)", "height": 50.0, "perc": 9.1}, {"color": "rgb(58, 80, 138)", "height": 17.0, "perc": 3.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 18.2}, {"color": "rgb(33, 155, 136)", "height": 33.0, "perc": 6.1}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 18.2}, {"color": "rgb(94, 199, 96)", "height": 83.0, "perc": 15.2}, {"color": "rgb(155, 215, 59)", "height": 67.0, "perc": 12.1}, {"color": "rgb(220, 226, 37)", "height": 83.0, "perc": 15.2}]], "node_id": "cube13_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.6768435101768434]], "id": "", "name": "cube13_cluster2", "size": 4, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 30}, "custom_tooltips": ["\u2022", "osobnosti", "tzv", "vl\u00e1dy", "\u0161tadi\u00f3n", "p\u00f4vodu", "sur", "park", "priamo", "rozhodca", "hrad", "les", "arm\u00e1dy", "vrch", "prezident", "ostrov", "des", "\u010de\u013ea\u010f", "kult\u00fary", "black", "rock", "gr\u00e9ckej", "top", "r\u00ed\u0161e", "\u2014", "most", "sily", "lat", "z\u00e1kon", "homo"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 20.0, "perc": 6.7}, {"color": "rgb(58, 80, 138)", "height": 10.0, "perc": 3.3}, {"color": "rgb(46, 107, 141)", "height": 10.0, "perc": 3.3}, {"color": "rgb(36, 131, 141)", "height": 20.0, "perc": 6.7}, {"color": "rgb(33, 155, 136)", "height": 30.0, "perc": 10.0}, {"color": "rgb(51, 178, 121)", "height": 40.0, "perc": 13.3}, {"color": "rgb(94, 199, 96)", "height": 40.0, "perc": 13.3}, {"color": "rgb(155, 215, 59)", "height": 100.0, "perc": 33.3}, {"color": "rgb(220, 226, 37)", "height": 30.0, "perc": 10.0}]], "node_id": "cube13_cluster2", "projection_stats": []}, "type": "circle"}, {"color": [[0.6681681681681682]], "id": "", "name": "cube14_cluster0", "size": 3, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 8}, "custom_tooltips": ["martin", "dejiny", "hrad", "les", "jazyk", "robert", "cirkvi", "sts"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 33.0, "perc": 12.5}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 33.0, "perc": 12.5}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 37.5}, {"color": "rgb(94, 199, 96)", "height": 67.0, "perc": 25.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 33.0, "perc": 12.5}]], "node_id": "cube14_cluster0", "projection_stats": []}, "type": "circle"}, {"color": [[0.6122122122122122]], "id": "", "name": "cube14_cluster1", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 5}, "custom_tooltips": ["in", "\u0026", "von", "black", "alexander"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 50.0, "perc": 20.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 100.0, "perc": 40.0}, {"color": "rgb(51, 178, 121)", "height": 0.0, "perc": 0.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 50.0, "perc": 20.0}, {"color": "rgb(220, 226, 37)", "height": 50.0, "perc": 20.0}]], "node_id": "cube14_cluster1", "projection_stats": []}, "type": "circle"}, {"color": [[0.5538872205538872]], "id": "", "name": "cube14_cluster2", "size": 2, "tooltip": {"cluster_stats": {"above": [], "below": [], "size": 3}, "custom_tooltips": ["le", "san", "en"], "dist_label": "Member", "histogram": [[{"color": "rgb(70, 18, 100)", "height": 0.0, "perc": 0.0}, {"color": "rgb(68, 51, 125)", "height": 0.0, "perc": 0.0}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 50.0, "perc": 33.3}, {"color": "rgb(36, 131, 141)", "height": 0.0, "perc": 0.0}, {"color": "rgb(33, 155, 136)", "height": 0.0, "perc": 0.0}, {"color": "rgb(51, 178, 121)", "height": 100.0, "perc": 66.7}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]], "node_id": "cube14_cluster2", "projection_stats": []}, "type": "circle"}]};
+    const colorscale = [[0.0, "rgb(68, 1, 84)"], [0.1, "rgb(72, 35, 116)"], [0.2, "rgb(64, 67, 135)"], [0.3, "rgb(52, 94, 141)"], [0.4, "rgb(41, 120, 142)"], [0.5, "rgb(32, 144, 140)"], [0.6, "rgb(34, 167, 132)"], [0.7, "rgb(68, 190, 112)"], [0.8, "rgb(121, 209, 81)"], [0.9, "rgb(189, 222, 38)"], [1.0, "rgb(253, 231, 36)"]];
+    const summary = {"color_function_name": ["Row number"], "custom_meta": {"clusterer": "AgglomerativeClustering(affinity=\u0027cosine\u0027, linkage=\u0027complete\u0027, n_clusters=3)", "n_cubes": 15, "nerve_min_intersection": 1, "perc_overlap": 0.2, "projection": "knn_distance_5", "scaler": "MinMaxScaler()"}, "n_edges": 60, "n_nodes": 42, "n_total": 1256, "n_unique": 998, "node_color_function": ["mean"]};
+    const summary_histogram = [[[{"color": "rgb(70, 18, 100)", "height": 8.0, "perc": 2.4}, {"color": "rgb(68, 51, 125)", "height": 33.0, "perc": 9.5}, {"color": "rgb(58, 80, 138)", "height": 0.0, "perc": 0.0}, {"color": "rgb(46, 107, 141)", "height": 58.0, "perc": 16.7}, {"color": "rgb(36, 131, 141)", "height": 100.0, "perc": 28.6}, {"color": "rgb(33, 155, 136)", "height": 83.0, "perc": 23.8}, {"color": "rgb(51, 178, 121)", "height": 67.0, "perc": 19.0}, {"color": "rgb(94, 199, 96)", "height": 0.0, "perc": 0.0}, {"color": "rgb(155, 215, 59)", "height": 0.0, "perc": 0.0}, {"color": "rgb(220, 226, 37)", "height": 0.0, "perc": 0.0}]]];
+  </script>
+
+  <div id="header">
+    <div class="wrap wrap-header">
+
+      <div class="">
+
+        <!-- toolbar -->
+        <div class="toolbar-container">
+        
+<div id="toolbar" class='wrap'>
+    <div id="tooltip_control" class="tool_item">
+        <h3>
+        <a href="#"><small id="tooltip_tag">[+]</small></a>
+        Cluster Details
+        </h3>
+    </div>
+
+    <div id="meta_control" class="tool_item">
+        <h3>
+        <a href="#"><small id="meta_tag">[+]</small></a>
+        Mapper Summary
+        </h3>
+    </div>
+
+    <div id="help_control" class="tool_item">
+        <h3>
+        <a href="#"><small id="helptip_tag">[+]</small></a>
+        Help
+        </h3>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+</div>
+        </div>
+        <!-- /toolbar -->
+
+        <div class='banner'>
+          <noscript><b>Requires JavaScript (d3.js) for visualizations</b></noscript>
+          <h1> Slovak Topology </h1>
+        </div>
+
+      </div>
+
+      <div class="wrap-logo">
+        <img id="logo" class='logo' src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAIAAAC3ytZVAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAACK1SURBVHhevdxXrJVV0wdw9NhfsfdeUVREEJHeFJCmgCg2jEaRmCCWxAtDYrwy8cJojAZRmgUJRZpUAUFBREGQpoK99977+9t71tnss5v7oDgX+13PembNmvnPf2at58j3bdfgP5eaWvlfVn755Zd99tnnxx9//PXXX41/+umn33777Y8//vjzzz/Tgv9Q/gs4tttuu1133XXffffdaaed9t9//++++26XXXb56quvBH/44YefdtppHufNm/fzzz9vv/32DRs23GuvvSBC/9tvv/36668/+OADA2Alc9tStiEcUBDS7rvvfsQRR4jqk08+kXmBpddZmpx55pmDBw9GjfHjxy9fvjy9qJUdd9zxkEMOadSoEXT23HPP995777XXXoNmer0NZJvAAQJpF8wPP/zw0UcfQeGvv/5K7/KkSZMm559/ft++fT/88ENVc+GFF4IsvSsS4B555JGNGzf+/fff8eX111/fFnypSf/7L8lxxx3XrFkzQLz55pucVhESm97VlYj/oIMOQhA1EtE+88wzok0aRYJiUGAZ6U499VR19+WXX1bQ3wr5d+AIVnPxs88+W7t27aefflrZS8F37dq1RYsWxsccc4zwVq9efckllwjvhRdeCJ0K8vnnnwMFOqeccspJJ52EU+VAr6/8UzjUvwwfeuihKmLjxo1VFrYyufjii7VSiOgse++9t5o6+OCDW7ZsuW7dOqEmvYoCAgTUUIBywAEHYKLzKL3bWvlHcOyxxx6KmR/vvvtu9R1OUxw0aNBRRx31xRdfNG3a1CmLU8j16quvnnzyyQwiSIUmUiDOY60HXyDr/MKv9GKrZOvh0CZw/p133qlXq99hhx0GDBjQpk0bXda5e+KJJ/rVaHfeeWe8gAWioZtzF3fSmioEKMrz9NNPZ/+bb77ZappsDRy77bYbtr/99ttSUd+NNU6nCVpppSBQKfoo2us+fqWX8eOPP94dBEeqaZOWwHTIkCFDhw4Fh8djjz0W3fJP9Oql3nDYT9k3b968X79+jjpSPTtUuFUap3uXsu/QoYPJ/fbbT99xNqOJruGEBpC7mX68Zs2aWFgsoETPc84559Zbb73lllt69+6tBpUMI7fddhtrMNWPknbVsn363+oE8LZR88gpFfPnz3/66aefeOKJyy67zLECqaRXSjRd8btTiQQcMo/YoFH5IhG8yyiMQllzHTZsWI8ePeIxJxYedthhAwcOHDly5LRp08aOHXvuueceeOCB2PTcc885pOgoPTYZ7NixI2RjYZVSD3bAgvVXXnnFb69evdavXw8CLRBAcg6Rnj174q043TJJWlYrXbp0USlqRKiaDnSEARog4pdLBHoDyLzcUvCW5vvvv689xUHubL7mmmtuv/129HQGWUKZJlFZgJYkjWPy5MkQYY1ZaqCpvqKrhUOzwENYGHOuW7duDvzp06fbTwwcEpi8tW7d+qKLLoKLahIM4OSTZw5R83qktSbfeuutuEopEz1V++S0+L1y0XIfY1BIEuDcYdlFXkVcfvnl7du3N8OT8Couu9a6gxiwb/mMGTMifsY//vjjPn36ALTKi0lVcGh4wtiwYUM8yuell176/fff88zpCBfexysCHYEppfPOO69///6dOnVq27atNDo1vMIaMLksXHnllWoblVhGbBBs2rTp6KOP9ovzmYxnxQw43NCCSuybjI1CMMJdFrjsKxnLlXDuVGIfFnJmi2oQ+Xs4xAyOl156KT1nTxZlKULba6W2kV6JigBCqPmlieQaZLwVs5CQRckIgGXIAshB88YbbyCgLzRmKesmYcEjfnlri5jJeFArHp999lnUsxEj8FUsDmmMSxrZ2xos0NblKNhUQf6m0+A/xhZfnFGDE5ym4C1OFjiak82bNzv23K94zFcz3JJS1zDntEnuahaaDk1cQHhNMd9vmn6dGvGYL25r8IVXw4YN2eGPcwrd0utagbiPAIik5/JSCQ47oeiLL76YnmsF58VjECHJ+bhx4/ITEiIk8atkjMUFBwdegAaTlY+EI46jxOlLGaXjniowxnPgxkAnUgJyEJOEca1h6dKlbujmuWovPQXvuJeU8sTVOaomPZeRsnDw44wzztAaIvJ80fBsaXs3MX7gs66urabXebJ48WL9X2MTPDWVBQsN3yq0shzcggETDip7NPH2hBNOwKBkIiuccXixFqyJ31WrVrVr144bOGULsOIFQIvZEaJhQZByei4lZeHgn/5fnHMCDk6IRGwS4lcXAH8Bj5YtW8ZjkXgbKCCIeSgbqGflZhWG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">
+      </div>
+    </div>
+
+  </div>
+
+    <div id="canvas" class='canvas'>
+      <!-- Graph will go in here -->
+      <svg id='svg'>
+        <defs>
+          <filter id="drop-shadow-glow" filterUnits="userSpaceOnUse" width="250%" height="250%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur-out"/>
+            <feColorMatrix in="blur-out" type="hueRotate" values="0" result="color-out"/>
+            <feOffset in="color-out" dx="0" dy="0" result="the-shadow"/>
+            <feComponentTransfer type="linear" slope="0.2" result="shadow-opacity"/>
+            <feBlend in="SourceGraphic" in2="the-shadow" mode="normal"/>
+          </filter>
+          <filter id="drop-shadow-pulse" filterUnits="userSpaceOnUse" width="250%" height="250%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="blur-out">
+              <animate attributeName="stdDeviation" from="0" to="100" dur="1.5s" repeatCount="indefinite" />
+            </feGaussianBlur>
+            <feColorMatrix in="blur-out" type="hueRotate" values="0" result="color-out"/>
+            <feOffset in="color-out" dx="0" dy="0" result="the-shadow"/>
+            <feComponentTransfer type="linear" slope="0.2" result="shadow-opacity"/>
+            <feBlend in="SourceGraphic" in2="the-shadow" mode="normal"/>
+          </filter>
+        </defs>
+      </svg>
+
+    <!-- Panes for each of the tips -->
+    <div id="tooltip" class='pane pane-left'>
+      <div id="tooltip_content" class="pane_content">
+        <div id='tooltip_content_no_focus_node'>
+          Hover over a node to see attributes about it.
+        </div>
+        <div id='tooltip_content_focus_node' style='display:none'>
+        <div>
+  <div class='actions'>
+    <h3>Actions</h3>
+    <p>
+      <button class='btn center-on-node'>Center viewport on node</button>
+    </p>
+  </div>
+
+  <div class='details'>
+    <h2>Cluster Details <span style="font-size:0.7em">(node id: <span class='node_id'></span>)</span></h2>
+
+    <!-- histogram -->
+    <div class='histogram-wrapper'>
+      <hr><br/>
+
+      <h3><span class='distribution_label'></span> Distribution</h3>
+
+      <div class="histogram"></div>
+
+      <br><br>
+    </div>
+    <!-- /histogram -->
+
+    <!-- Projection Statistics -->
+    <div class='projection_stats' style='display:none'>
+
+      <hr><br/>
+
+      <h3>Projection Statistics</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Lens</th>
+            <th style="width:50px;"><small>Mean</small></th>
+            <th style="width:50px;"><small>Max</small></th>
+            <th style="width:50px;"><small>Min</small></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- Cluster Statistics -->
+    <div class='cluster_stats'>
+        <hr><br/>
+
+        <h3>Cluster Statistics</h3>
+        <div class='above-wrapper'>
+            <h3>Above Average</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th style="width:50px;"><small>Mean</small></th>
+                  <th style="width:50px;"><small>STD</small></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+        </div>
+
+        <div class='below-wrapper'>
+            <h3>Below Average</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th style="width:50px;"><small>Mean</small></th>
+                  <th style="width:50px;"><small>STD</small></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+        </div>
+
+        <h3>Size</h3>
+        <p class='cluster-size'></p>
+    </div>
+
+    <!-- Membership information -->
+    <div class='membership-information'>
+      <hr> <br/>
+
+      <h3>Members</h3>
+      <div class='list-of-members'></div>
+
+      <br><br>
+      <hr><br>
+    </div>
+    <!-- /membership information -->
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="helptip" class='pane pane-right'>
+      <div id="helptip_content" class="pane_content">
+        <!-- Help pane.
+    TODO: Add more information here.  -->
+
+<ul>
+<li>Click on a node to lock focus on that node. The node with the current focus will pulse. Click off of a node to release the lock.</li>
+<li>Dragging a node will fix its position on the screen. Double-click a fixed-position node to unfreeze it.</li>
+</ul>
+
+<table>
+    <tr>
+        <th>Key</th>
+        <th><small>Action</small></th>
+    </tr>
+
+    <tr>
+        <td>s</td>
+        <td><small>Nodes glow :D</small></td>
+    </tr>
+
+    <tr>
+        <td>c</td>
+        <td><small>remove glow</small></td>
+    </tr>
+
+    <tr>
+        <td>p</td>
+        <td><small>Print mode - white backgrounds</small></td>
+    </tr>
+
+    <tr>
+        <td>d</td>
+        <td><small>Display mode - black backgrounds</small></td>
+    </tr>
+
+    <tr>
+        <td>z</td>
+        <td><small>Turn off gravity</small></td>
+    </tr>
+
+    <tr>
+        <td>m</td>
+        <td><small>Spacious layout</small></td>
+    </tr>
+
+    <tr>
+        <td>e</td>
+        <td><small>Tight layout</small></td>
+    </tr>
+
+    <tr>
+        <td>f</td>
+        <td><small>Freeze layout</small></td>
+    </tr>
+
+    <tr>
+        <td>x</td>
+        <td><small>Unfreeze all nodes</small></td>
+    </tr>
+
+</table>
+
+<div class="control-wrapper">
+  <div class="control-row">
+    <button class='btn' type="button" id="download-config" name="download-config">Save config</button>
+  </div>
+
+  <div class="control-row">
+    <label for="config-file-loader">Load config file</label>
+    <input type="file" id="config-file-loader" name="config-file-loader" accept="application/json">
+    <button class='btn' id='load-config' disabled>Load</button>
+  </div>
+</div>
+      </div>
+    </div>
+
+    <div id="meta" class='pane pane-right'>
+      <div id="meta_content" class="pane_content">
+        <h2>Mapper Summary</h2>
+
+<hr><br>
+
+
+    
+        <h3>projection </h3> <p> knn_distance_5</p>
+    
+        <h3>n_cubes </h3> <p> 15</p>
+    
+        <h3>perc_overlap </h3> <p> 0.2</p>
+    
+        <h3>clusterer </h3> <p> AgglomerativeClustering(affinity='cosine', linkage='complete', n_clusters=3)</p>
+    
+        <h3>scaler </h3> <p> MinMaxScaler()</p>
+    
+        <h3>nerve_min_intersection </h3> <p> 1</p>
+    
+
+
+<h3>Nodes</h3><p> 42 </p>
+
+<h3>Edges</h3><p> 60 </p>
+
+<h3>Total Samples</h3><p> 1256</p>
+
+<h3>Unique Samples</h3><p> 998</p>
+
+<h3>Color function</h3><p>
+  Row number
+</p>
+
+<h3>Node Color Function</h3><p> mean</p>
+
+
+<!-- histogram -->
+<hr><br/>
+
+<h3>Node Distribution</h3>
+
+<div class="histogram"></div>
+
+<br><br>
+<!-- /histogram -->
+
+<hr><br>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.1.1/d3.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+
+  <script>// Height and width settings
+var page_height = window.innerHeight - 5;
+var header_height = document.getElementById('header').offsetHeight;
+var canvas_height = page_height - header_height;
+document.getElementById("canvas").style.height = canvas_height + "px";
+var width = document.getElementById("canvas").offsetWidth;
+var height = document.getElementById("canvas").offsetHeight;
+var w = width;
+var h = height;
+var padding = 40;
+
+var focus_node_id = null;
+var focus_node = null;
+var text_center = false;
+var outline = false;
+
+// Size for zooming
+var size = d3.scalePow().exponent(1)
+           .domain([1,100])
+           .range([8,24]);
+
+// Variety of variable inits
+var default_node_color = "#ccc";
+var default_node_color = "rgba(160,160,160, 0.5)";
+var default_link_color = "rgba(160,160,160, 0.5)";
+var nominal_base_node_size = 8;
+var nominal_text_size = 15;
+var max_text_size = 24;
+var nominal_stroke = 1.0;
+var max_stroke = 4.5;
+var max_base_node_size = 36;
+var min_zoom = 0.1;
+var max_zoom = 7;
+var zoom;
+var svg, g;
+var simulation;
+var link, node;
+var drag;
+var dragging = false;
+var circle;
+var text;
+var focus_via_click = false;
+var nodes = [];
+var links = [];
+
+var tocolor = "fill";
+var towhite = "stroke";
+if (outline) {
+  tocolor = "stroke";
+  towhite = "fill";
+}
+
+/**
+ * Side panes
+ */
+
+// Show/Hide Functionality
+function toggle_pane(content, content_id, tag) {
+  var active = content.active ? false : true;
+
+  if (active) {
+    content_id.style("display", "block");
+    tag.node().textContent = "[-]";
+  } else {
+    content_id.style("display", "none");
+    tag.node().textContent = "[+]";
+  }
+
+  // TODO: This is probably not the best way to find the correct height.
+  var h = canvas_height - content.offsetTop - padding;
+  content_id.style("height", h + "px")
+
+  content.active = active;
+}
+
+d3.select("#tooltip_control").on("click", function(e) {
+  toggle_pane(tooltip_content,
+              d3.select("#tooltip_content"),
+              d3.select("#tooltip_tag"))
+
+});
+
+d3.select("#meta_control").on("click", function(e) {
+  toggle_pane(meta_content,
+              d3.select("#meta_content"),
+              d3.select("#meta_tag"))
+
+});
+
+d3.select("#help_control").on("click", function(e) {
+  toggle_pane(helptip_content,
+              d3.select("#helptip_content"),
+              d3.select("#helptip_tag"))
+});
+
+d3.select('#select-color-function').on('input', function(e){
+  color_function_index = parseInt(e.target.value);
+  update_color_functions()
+})
+d3.select('#select-node-color-function').on('input', function(e){
+  node_color_function_index = parseInt(e.target.value);
+  update_color_functions()
+})
+
+/**
+ *
+ * Set up color scale
+ *
+ *
+ */
+// var colorscale defined in base.html
+var domain = colorscale.map((x)=>x[0])
+var palette = colorscale.map((x)=>x[1])
+
+var color = d3.scaleLinear()
+  .domain(domain)
+  .range(palette);
+
+/*
+* one-time setups, like SVG and force init
+*/
+function init() {
+
+  zoom = d3.zoom()
+    .scaleExtent([min_zoom, max_zoom])
+    .on('zoom', zoomed)
+
+  // We draw the graph in SVG
+  svg = d3.select("#canvas svg")
+          .attr("width", width)
+          .attr("height", height)
+          .style("cursor","move")
+          .call(zoom)
+          .on('dblclick.zoom', null); // prevent default zoom-in on dblclick
+
+  svg.on('click.focus', function(e){
+    set_focus_via_click(null);
+  });
+
+  g = svg.append("g")
+
+  link = g.selectAll(".link")
+  node = g.selectAll(".node")
+  text = g.selectAll(".text")
+
+  simulation = d3.forceSimulation()
+    .force('charge', d3.forceManyBody().strength(-1200))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('link', d3.forceLink().distance(5))
+    .force('x', d3.forceX()) // not sure what this does...
+    .force('y', d3.forceY())
+    .on('tick', ticked)
+
+  drag = d3.drag()
+    .on("start", function(e, d){
+      svg.style('cursor','grabbing');
+      if (!e.active) {
+        simulation.alphaTarget(0.3).restart()
+      }
+      d.fx = d.x
+      d.fy = d.y
+      dragging = true;
+    })
+    .on('drag', function(e, d){
+      d.fx = e.x
+      d.fy = e.y
+    })
+    .on('end', function(e, d){
+      if (!e.active) {
+        simulation.alphaTarget(0)
+      }
+      dragging = false;
+    });
+
+  resize();
+  d3.select(window).on("resize", resize);
+
+  d3.select(window).on("mouseup.focus", function(e){
+    if (focus_node == null) {
+      set_cursor('move');
+    } else {
+      set_cursor('pointer');
+    }
+  });
+}
+
+function set_histogram(selection, data){
+  selection.selectAll('.bin')
+    .data(data)
+    .join(
+      enter => enter.append('div')
+        .attr('class', 'bin')
+        .call(enter => enter.append('div')
+          .text(d => d.perc + '%'))
+      ,
+      update => update
+        .call(update => update.select('div')
+          .text(d => d.perc + '%'))
+    )
+    .style('height', (d) => (d.height || 1) + 'px')
+    .style('background', (d) => d.color);
+}
+
+
+
+var color_function_index = 0;
+var node_color_function_index = 0;
+
+function update_color_functions(){
+  // update_meta_content_histogram
+  set_histogram(d3.select('#meta_content .histogram'), summary_histogram[node_color_function_index][color_function_index])
+
+  // update node colors
+  node.style(tocolor, function(d) {
+    return color(d.color[node_color_function_index][color_function_index]);
+  })
+
+  // update focus node display, if focus_node
+  if (focus_node != null){
+    set_focus_node_histogram(focus_node)
+  }
+}
+
+function update_meta_content_histogram(){
+
+}
+
+function draw_circle_size(d) {
+  return (d3.symbol()
+    .size(function(d) {
+      if (!d.size_modifier) {
+          d.size_modifier = 1;
+      }
+      return d.size * 50 * d.size_modifier;
+    })
+    .type(d3.symbolCircle))(d)
+}
+
+function start() {
+
+  /*
+  * Force-related things
+  *
+  */
+  // shallow copy to enable restarting,
+  // because otherwise, starting the force simulation mutates the links (replaces indeces with refs)
+  nodes = graph.nodes.map(n => Object.assign({}, n));
+  links = graph.links.map(l => Object.assign({}, l));
+
+  // draw links first so that they appear behind nodes
+  link = link
+    .data(links)
+    .join("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return d.w * nominal_stroke; })
+      .style("stroke-width", function(d) { return d.w * nominal_stroke; });
+
+  node = node
+    .data(nodes, d => d.name)
+    .join(enter => enter.append("g")
+      .attr("class", "node")
+      .attr("id", function(d){ return "node-" + d.name })
+      // append circles...
+      .append("path")
+        .attr("d", draw_circle_size )
+        .attr("class", "circle")
+        .on("mouseover.focus", node_mouseover)
+        .on("mouseout.focus", node_mouseout)
+        .on('mousedown.focus', node_mousedown)
+        .on("dblclick.freeze", (e, d) => unfreeze_node(d) )
+        .on('click.zoom', node_click)
+        .on('center_viewport', center_on_node)
+        .call(drag));
+
+  simulation.nodes(nodes);
+  simulation.force('link').links(links);
+  simulation.alpha(1).restart()
+
+  update_color_functions()
+}
+
+init();
+start();
+
+function restart() {
+  // nodes = []
+  // links = []
+  // node.remove()
+  // link.remove()
+  focus_via_click = false;
+  start()
+}
+
+function zoomed({transform}){
+  g.attr('transform', transform)
+}
+
+function ticked() {
+  node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+}
+
+/*
+* Resizing window and redraws
+*/
+function resize() {
+  var width = document.getElementById("canvas").offsetWidth;
+  var height = document.getElementById("canvas").offsetHeight;
+
+  svg.attr("width", width)
+     .attr("height", height);
+
+  simulation.force('center', d3.forceCenter(width / 2, height / 2));
+  simulation.alpha(.3).restart();
+
+  w = width;
+  h = height;
+}
+
+function set_focus_via_click(d) {
+  focus_via_click = (d != null ? true : false);
+  set_focus_node(d);
+}
+
+function do_above_below_stats(wrapper, data) {
+  let column_order = ['feature', 'mean', 'std'];
+  wrapper.select('tbody')
+    .selectAll('tr')
+    .data(data, d => d)
+    .join(enter => {
+        let tr = enter.append('tr')
+        tr.append('td')
+        tr.append('td').style('font-size', 'smaller')
+        tr.append('td').style('font-size', 'smaller').attr('class', 'std')
+        return tr
+        })
+    .selectAll('td')
+    .text( (d, i) => d[column_order[i]] )
+  if (data.length > 0) {
+    wrapper.style('display', 'block')
+  } else {
+    wrapper.style('display', 'none')
+  }
+}
+
+function do_projection_stats(wrapper, data) {
+  let column_order = ['name', 'mean', 'min', 'max'];
+  wrapper.select('tbody').selectAll('tr')
+    .data(data, d => d)
+    .join(enter => {
+      let tr = enter.append('tr')
+      tr.append('td')
+      tr.append('td').style('font-size', 'smaller')
+      tr.append('td').style('font-size', 'smaller')
+      tr.append('td').style('font-size', 'smaller')
+      return tr;
+    })
+    .selectAll('td')
+    .text( (d, i) => d[column_order[i]] );
+  if (data.length > 0) {
+    wrapper.style('display', 'block')
+  } else {
+    wrapper.style('display', 'none')
+  }
+}
+
+let focus_node_tooltip_select = d3.select('#tooltip_content_focus_node');
+let tooltip_content_no_focus_node = d3.select('#tooltip_content_no_focus_node')
+let projection_stats_select = focus_node_tooltip_select.select('.projection_stats');
+let cluster_stats_select = focus_node_tooltip_select.select('.cluster_stats');
+let above_wrapper = cluster_stats_select.select('.above-wrapper');
+let below_wrapper = cluster_stats_select.select('.below-wrapper');
+let list_of_members = focus_node_tooltip_select.select('.membership-information .list-of-members');
+
+function set_focus_node(d){
+  if (d == null) {
+    focus_node = null;
+    set_cursor('move');
+    tooltip_content_no_focus_node.style('display', 'block');
+    focus_node_tooltip_select.style('display', 'none')
+    exit_highlight();
+  } else if (focus_node == null || d.name != focus_node.name) {
+    exit_highlight(focus_node);
+    focus_node = d;
+    set_highlight(focus_node);
+    set_cursor('pointer');
+
+    tooltip_content_no_focus_node.style('display', 'none');
+
+    focus_node_tooltip_select.select('button.center-on-node').node().dataset.nodeId = d.tooltip.node_id;
+    focus_node_tooltip_select.select('.node_id').text(d.tooltip.node_id)
+    focus_node_tooltip_select.select('.distribution_label').text(d.tooltip.dist_label)
+
+    // histogram
+    set_focus_node_histogram(d)
+
+    // projection statistics
+    let projection_stats = d.tooltip.projection_stats;
+    do_projection_stats(projection_stats_select, projection_stats)
+
+    // cluster statistics
+    let cluster_stats = d.tooltip.cluster_stats;
+    if (cluster_stats) {
+
+      do_above_below_stats(above_wrapper, cluster_stats.above);
+
+      do_above_below_stats(below_wrapper, cluster_stats.below);
+
+      cluster_stats_select.select('.cluster-size').text(cluster_stats.size)
+
+      cluster_stats_select.style('display', 'block')
+    } else {
+      cluster_stats_select.style('display', 'none')
+    }
+
+    // membership information
+    list_of_members.selectAll('span')
+      .data(d.tooltip.custom_tooltips, d => d)
+      .join('span')
+        .html(d => d)
+        .style('display', 'inline-block')
+        .style('padding', '0 3px')
+
+    focus_node_tooltip_select.style('display', 'block');
+
+    set_focus_node_histogram(d)
+  }
+  // else, it's already the focus node, so do nothing...
+}
+
+d3.select('#tooltip .center-on-node').on('click', function(e){
+  // d3.select('#node-' + focus_node.name + ' .circle').dispatch('center_viewport')
+  d3.select('#node-' + e.target.dataset.nodeId + ' .circle').dispatch('center_viewport')
+})
+
+function set_focus_node_histogram(d){
+  set_histogram(d3.select('#tooltip_content .histogram'), d.tooltip.histogram[color_function_index])
+}
+
+function set_highlight(node) {
+  let node_id = node.name;
+  d3.select('#node-' + node_id + ' .circle').classed('highlight', true);
+  d3.select('#node-' + node_id).classed('highlight', true);
+}
+
+function exit_highlight(node) {
+  let node_id = false;
+  if (node) {
+    node_id = node.name
+  }
+  if (!node_id) {
+     d3.selectAll('.node .circle').classed('highlight', false);
+     d3.selectAll('.node').classed('highlight', false);
+  } else {
+     d3.select('#node-' + node_id + ' .circle').classed('highlight', false);
+     d3.select('#node-' + node_id).classed('highlight', false);
+  }
+
+  do_projection_stats(projection_stats_select, [])
+  do_above_below_stats(above_wrapper, [])
+  do_above_below_stats(below_wrapper, [])
+}
+
+function set_cursor(state) {
+  if (!dragging) {
+    svg.style('cursor', state);
+  }
+}
+
+function node_is_fixed(d){
+  return d.hasOwnProperty('fx') || d.hasOwnProperty('fy')
+}
+
+function node_click(e, d) {
+  e.stopPropagation()
+  // to prevent the svg click.focus listener from unsetting the focus node...
+}
+
+function center_on_node(e, d) {
+  svg.transition().duration(250).call(zoom.translateTo, d.x, d.y);
+}
+
+function node_mouseover(e, d) {
+  d.was_fixed = d.hasOwnProperty('fx') || d.hasOwnProperty('fy')
+  if (!d.was_fixed){
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  if (e.buttons == 0){
+    set_cursor('pointer');
+    if (!focus_via_click) {
+      set_focus_node(d);
+    }
+  }
+}
+
+function node_mouseout(e, d) {
+  if (!d.was_fixed){
+      delete d.fx
+      delete d.fy
+  }
+  if (e.buttons == 0){
+    set_cursor('move');
+    if (!focus_via_click) {
+        set_focus_node(null);
+    }
+  }
+}
+
+function node_mousedown(e, d) {
+  e.stopPropagation();
+  if (focus_node.name != d.name) {
+      //switch click focus
+      set_focus_via_click(d);
+  } else if (!focus_via_click) {
+      //d already selected but not via click; set click true
+      focus_via_click = true;
+  }
+}
+
+
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
+function unfreeze_node(d){
+  delete d.fy
+  delete d.fx
+  return d
+}
+
+function freeze_node(d){
+  d.fx = d.x;
+  d.fy = d.y;
+  return d
+}
+
+// search functionality
+d3.select('#searchbar')
+  .on('submit', function(event){
+      /*
+      * Searchbar functionality
+      *
+      * Permits AND, OR, and EXACT functionality
+      *
+      */
+      event.preventDefault();
+      // always running this will clear search results on a submit with an empty query
+      node.datum(d => { d.size_modifier = 1; return d });
+      node.style('filter', null)
+
+      node.datum(d => {
+        let to_lower = tooltip => String(tooltip).toLowerCase();
+        d.tooltip.custom_tooltips_lowercase = d.tooltip.custom_tooltips.map(to_lower)
+        return d
+      });
+
+      let search_query = d3.select(this).select('input').property('value').toLowerCase();
+      if (search_query) {
+          let search_mode = d3.select(this).select('input[name="search_mode"]:checked').property('value');
+
+          let node_ratio_fn = (d, i) => {
+            matches = d.tooltip.custom_tooltips_lowercase.map(map_fn)
+            let how_many = matches.filter(x=>x).length;
+
+            // Future optional feature -- size relative to ratio _within-node_
+            let out_of = d.tooltip.cluster_stats.size;
+            let ratio = how_many / out_of;
+
+            // Node sizes will be overall number of items in the node
+            // number of matching
+            d.size_modifier = how_many;
+          }
+
+          let map_fn;
+          let node_each_fn;
+          switch (search_mode) {
+            case 'and':
+              search_query = search_query.split(' ');
+              map_fn = tooltip => {
+                return search_query.every(query_word => { return tooltip.includes( query_word ) })
+              }
+              node.each(node_ratio_fn)
+              break;
+            case 'or':
+              search_query = search_query.split(' ');
+              map_fn = tooltip => {
+                return search_query.some(query_word => { return tooltip.includes( query_word ) })
+              }
+              node.each(node_ratio_fn)
+              break;
+            case 'exact':
+              node.filter((d,i) => {
+                  matches = d.tooltip.custom_tooltips_lowercase.map(tooltip => tooltip == search_query)
+                  return matches.some(e => e);
+              })
+              .style("filter", "url(#drop-shadow-glow)");
+              break;
+            default:
+              console.error(`search mode ${search_mode} unknown`);
+              return;
+          }
+
+      }
+      node.attr("d", draw_circle_size )
+
+  })
+
+
+//https://stackoverflow.com/questions/51319147/map-default-value
+class MapWithDefault extends Map {
+  get(key) {
+    if (!this.has(key)) {
+      this.set(key, this.default())
+    };
+    return super.get(key);
+  }
+
+  constructor(defaultFunction, entries) {
+    super(entries);
+    this.default = defaultFunction;
+  }
+}
+
+d3.select('#min_intersction_selector')
+  .on('submit', function(event){
+    // replicates the logic in kmapper.nerve.GraphNerve.compute
+    event.preventDefault()
+
+    let result = new MapWithDefault(() => []);
+
+    // loop over all combinations of nodes
+    // https://stackoverflow.com/a/43241295/1396649
+    let candidates = []
+    let num_nodes = graph.nodes.length;
+    for (let i = 0; i < num_nodes - 1; i++){
+      for (let j = i + 1; j < num_nodes; j++) {
+        candidates.push([i, j]);
+      }
+    }
+
+    candidates.forEach(function(candidate) {
+      let node1_idx = candidate[0];
+      let node2_idx = candidate[1];
+      let node1 = graph.nodes[node1_idx];
+      let node2 = graph.nodes[node2_idx];
+      let intersection = node1.tooltip.custom_tooltips.filter(x => node2.tooltip.custom_tooltips.includes(x));
+      if (intersection.length >= Number(min_intersction_selector_input.property('value')) ) {
+        result.get(node1_idx).push(node2_idx)
+      }
+    })
+
+    let edges = []
+    result.forEach(function(value, key) {
+      let _edges = value.map(function(end) {
+        return [key, end]
+      })
+      edges.push(_edges);
+    })
+
+    edges = edges.flat().map(function(edge) {
+      return {
+        'source': edge[0],
+        'target': edge[1],
+        'width': 1
+      }
+    })
+
+    graph.links = edges;
+    restart()
+  })
+
+
+// Dynamically size the min_intersection_selector input
+let min_intersction_selector_input = d3.select('#min_intersction_selector input');
+
+min_intersction_selector_input
+  .on('input', function(event){
+    resizeInput.call(this)
+  })
+
+function resizeInput() {
+  this.style.width = ( this.value.length + 3 ) + "ch";
+}
+
+// Only trigger if input is present
+if (min_intersction_selector_input.size()) {
+  resizeInput.call(min_intersction_selector_input.node())
+}
+
+
+// Key press events
+let searchbar = d3.select('#searchbar input');
+
+d3.select(window).on("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return; // Do nothing if the event was already processed
+  }
+
+  // if searchbar is present and has focus
+  if (searchbar.size() && searchbar.node().matches(':focus')){
+      return; // let them use the search bar.
+  }
+
+  if (!event.ctrlKey && !event.altKey && !event.metaKey) {
+    switch (event.key) {
+      case "f": // freeze all
+        node.datum(freeze_node);
+        break;
+      case "x": // unfreeze all
+        node.datum(unfreeze_node);
+        simulation.alphaTarget(.3).restart()
+        break
+      case "s":
+        // Glow
+        node.style("filter", "url(#drop-shadow-glow)");
+        break;
+      case "c":
+        // Remove glow
+        node.style("filter", null);
+        break;
+      case "p":
+        // Turn to print mode, white backgrounds
+        d3.select("body").attr('id', null).attr('id', "print")
+        break;
+      case "d":
+        // "Display" mode (dark background)
+        d3.select("body").attr('id', null).attr('id', "display")
+        break;
+      case "z":
+        // turn off gravity (??)
+        simulation
+          .force('charge', d3.forceManyBody().strength(0))
+          .alphaTarget(.3)
+          .restart()
+        break
+      case "m":
+        // spacious layout
+        simulation
+          .force('charge', d3.forceManyBody().strength(-1200))
+          .alphaTarget(.3)
+          .restart()
+        break
+      case "e":
+        // tight layout
+        simulation
+          .force('charge', d3.forceManyBody().strength(-60))
+          .alphaTarget(.3)
+          .restart()
+        break
+      default:
+        return; // Quit when this doesn't handle the key event.
+    }
+  event.preventDefault();
+  }
+  // Cancel the default action to avoid it being handled twice
+}, true);
+
+
+
+/*
+* Save and load config
+*
+*/
+
+// save config
+document.getElementById('download-config').addEventListener('click', function(e){
+  let config = {}
+  node.data().forEach(node => {
+      let config_node = {}
+
+      if ( node.hasOwnProperty('fx') && node.hasOwnProperty('fy') ) {
+        config_node['fx'] = config_node['x'] = node['fx']
+        config_node['fy'] = config_node['y'] = node['fy']
+      } else {
+        config_node['x'] = node['x']
+        config_node['y'] = node['y']
+      }
+      config[node['name']] = config_node
+    })
+
+  //JSON.stringify(config,undefined,2)
+
+  // https://stackoverflow.com/a/45594892
+  var fileName = 'kmapper-config.json';
+
+  // Create a blob of the data. Blob is native JS api
+  var fileToSave = new Blob([JSON.stringify(config)], {
+      type: 'application/json',
+      name: fileName
+  });
+
+  // function from FileSaver.js
+  saveAs(fileToSave, fileName);
+})
+
+// load config
+var config_file_loader = document.getElementById('config-file-loader');
+
+config_file_loader.addEventListener('change', function(){
+  document.getElementById('load-config').disabled = ( config_file_loader.files.length === 0 )
+})
+
+document.getElementById('load-config').addEventListener('click', function(){
+  const config_file = config_file_loader.files[0];
+  const fr = new FileReader();
+  fr.onload = function(e) {
+    var config = JSON.parse(e.target.result);
+    load_config(config);
+  }
+  fr.readAsText(config_file)
+})
+function load_config(config){
+  node = node.datum(function(d, i){
+    let load_node_config = config[d['name']]
+    d = Object.assign(d, load_node_config);
+    if ( d.hasOwnProperty('fx') && !load_node_config.hasOwnProperty('fx') ) {
+      delete d['fx']
+    }
+    if ( d.hasOwnProperty('fy') && !load_node_config.hasOwnProperty('fy') ) {
+      delete d['fy']
+    }
+    return d;
+  })
+  simulation.restart()
+}
+</script>
+</body>
+
+</html>
